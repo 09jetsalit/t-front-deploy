@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.css';
-import Nav from './component/nav';
-import { Card } from './component/card';
+import React from "react";
+import "./App.css";
+import Nav from "./component/nav";
+import Card from "./component/card";
 
 const App = () => {
   // ข้อมูลสมมติสำหรับแต่ละชุด
@@ -26,17 +26,34 @@ const App = () => {
       date: "1982-11-30",
       age: 40,
       gender: "Male",
-    }
+    },
+    {
+      fullname: "Mike Johnson",
+      nickname: "Mikey",
+      date: "1982-11-30",
+      age: 40,
+      gender: "Male",
+    },
   ];
 
   return (
-    <div>
+    <div className="w-full h-screen">
       <h1>Hello World</h1>
+      {/* Add member */}
       <Nav />
-      {/* ใช้ map เพื่อแสดงข้อมูลของแต่ละชุด */}
-      {mockData.map((data, index) => (
-        <Card key={index} {...data} />
-      ))}
+
+      <div className="mr-5 ml-5 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        {mockData.map((member, index) => (
+          <Card
+            key={index}
+            fullname={member.fullname}
+            nickname={member.nickname}
+            date={member.date}
+            age={member.age}
+            gender={member.gender}
+          />
+        ))}
+      </div>
     </div>
   );
 };
