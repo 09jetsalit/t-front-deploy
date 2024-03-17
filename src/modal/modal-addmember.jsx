@@ -178,7 +178,7 @@ const Modal = ({ onClose }) => {
           )}
           <div className="flex flex-row justify-center items-center flex-nowrap">
           <button onClick={handleData} className="bg-blue-500 rounded-md hover:bg-blue-200 p-1.5 mr-2 mt-2 mb-4">Summit</button>
-          <button onClick={onClose} className="p-1.5 mr-2 mt-2 mb-4">Close</button>
+          <button onClick={onClose} className="p-1.5 mr-2 mt-2 mb-4 bg-slate-300 rounded-md">Close</button>
           </div>
         </form>
       </div>
