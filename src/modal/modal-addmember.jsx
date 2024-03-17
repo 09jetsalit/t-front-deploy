@@ -11,22 +11,22 @@ const Modal = ({ onClose }) => {
   const [otherGender, setOtherGender] = useState("");
 
   const handleData = async () => {
-  const data = {
-    fullname: fullname,
-    nickname: nickname,
-    date0fbirth: dob,
-    age: age,
-    gender: gender,
-  }
-  try {
-    const resposedata = await axios.post("/", data);
-    if (resposedata.status === 200 && resposedata.data) {
-        return <Link to='/' />;
+    const data = {
+      fullname: fullname,
+      nickname: nickname,
+      date0fbirth: dob,
+      age: age,
+      gender: gender,
+    };
+    try {
+      const resposedata = await axios.post("/", data);
+      if (resposedata.status === 200 && resposedata.data) {
+        return <Link to="/" />;
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-}
+  };
 
   const handleDOBChange = (e) => {
     const selectedDate = new Date(e.target.value);
@@ -63,7 +63,7 @@ const Modal = ({ onClose }) => {
         className="modal-content bg-white p-2 rounded-lg"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="text-center mb-2 text-xl pt-3">Add Member</div>
+        <div className="text-center mb-2 text-xl pt-3 font-bold">Add Member</div>
         <form
           className="flex flex-col pr-20 pl-20"
           onSubmit={(e) => e.preventDefault()}
@@ -109,15 +109,15 @@ const Modal = ({ onClose }) => {
           <label htmlFor="age" className="flex flex-col items-center">
             Age:{" "}
           </label>
-            {/* Flexbox container */}
-            <input
-              type="number"
-              className="rounded-md border-2 border-slate-400 text-center" // เพิ่ม text-center เพื่อจัดวางข้อความใน input ตรงกลาง
-              name="age"
-              value={age}
-              readOnly // ตั้งค่าให้เป็นอ่านอย่างเดียว
-              required
-            ></input>
+          {/* Flexbox container */}
+          <input
+            type="number"
+            className="rounded-md border-2 border-slate-400 text-center" // เพิ่ม text-center เพื่อจัดวางข้อความใน input ตรงกลาง
+            name="age"
+            value={age}
+            readOnly // ตั้งค่าให้เป็นอ่านอย่างเดียว
+            required
+          ></input>
           {/* gender */}
           <label htmlFor="gender" className="flex flex-col items-center">
             Gender:{" "}
@@ -176,9 +176,21 @@ const Modal = ({ onClose }) => {
               ></input>
             </div>
           )}
+
+          {/* button */}
           <div className="flex flex-row justify-center items-center flex-nowrap">
-          <button onClick={handleData} className="bg-blue-500 rounded-md hover:bg-blue-200 p-1.5 mr-2 mt-2 mb-4">Summit</button>
-          <button onClick={onClose} className="p-1.5 mr-2 mt-2 mb-4 bg-slate-300 rounded-md">Close</button>
+            <button
+              onClick={handleData}
+              className="bg-blue-500 rounded-md hover:bg-blue-200 p-1.5 mr-2 mt-2 mb-4"
+            >
+              Summit
+            </button>
+            <button
+              onClick={onClose}
+              className="p-1.5 mr-2 mt-2 mb-4 bg-slate-300 rounded-md"
+            >
+              Close
+            </button>
           </div>
         </form>
       </div>
