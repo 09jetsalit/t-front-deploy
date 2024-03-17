@@ -4,7 +4,7 @@ import editIcon from "../assets/edit.svg";
 import ModalEdit from "../modal/modal-edit";
 import ModalDelete from "../modal/modal.delete";
 
-const Card = ({ id, fullname, nickname, date, age, gender }) => {
+const Card = ({ id, fullname, nickname, date, age, gender, refreshData }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State for edit modal
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete modal
 
@@ -34,7 +34,10 @@ const Card = ({ id, fullname, nickname, date, age, gender }) => {
         />
         {isEditModalOpen && (
           <ModalEdit
-            onClose={() => setIsEditModalOpen(false)}
+            onClose={() => {
+              setIsEditModalOpen(false);
+              refreshData(); // Refresh data after editing
+            }}
             id={id}
             fullname={fullname}
             nickname={nickname}
@@ -51,7 +54,10 @@ const Card = ({ id, fullname, nickname, date, age, gender }) => {
         />
         {isDeleteModalOpen && (
           <ModalDelete
-            onClose={() => setIsDeleteModalOpen(false)}
+            onClose={() => {
+              setIsDeleteModalOpen(false);
+              refreshData(); // Refresh data after deleting
+            }}
             id={id}
           />
         )}

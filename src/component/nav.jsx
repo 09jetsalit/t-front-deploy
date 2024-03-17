@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../modal/modal-addmember"; // Import Modal component ที่คุณได้สร้างไว้
 
-const Nav = () => {
+const Nav = ({ refreshData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false); // state เพื่อเก็บสถานะของ Modal
 
   const handleAddMemberClick = () => {
@@ -19,7 +19,7 @@ const Nav = () => {
         </button>
       </nav>
       {/* แสดง Modal เมื่อ isModalOpen เป็น true */}
-      {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <Modal onClose={() => { setIsModalOpen(false); refreshData(); }} />}
     </div>
   );
 };
