@@ -4,7 +4,7 @@ import modalDeleteIcon from "../assets/delete-red.svg";
 const ModalDelete = ({ id, onClose }) => {
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`/${id}`); // Assuming your delete endpoint is configured correctly
+      await axios.delete(`http://127.0.0.1:8000/member/${id}`); // Assuming your delete endpoint is configured correctly
       console.log("Item deleted successfully with ID:", id);
       onClose(); // Close the modal after deletion
     } catch (error) {
@@ -13,7 +13,7 @@ const ModalDelete = ({ id, onClose }) => {
   };
 
   return (
-    <div
+    <div onSubmit={(e) => e.preventDefault()}
       className="fixed inset-0 bg-black bg-opacity-40 backdrop-blue-sm flex justify-center items-center"
       onClick={onClose}
     >
@@ -26,6 +26,7 @@ const ModalDelete = ({ id, onClose }) => {
         <p className="text-center mb-4">Are you sure you want to delete this item?</p>
         <div className="flex justify-center items-center">
           <button
+            type="summit"
             onClick={handleDeleteConfirm}
             className="bg-red-500 text-white rounded-md px-4 py-2 mr-2 hover:bg-red-200"
           >

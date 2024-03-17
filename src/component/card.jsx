@@ -53,11 +53,6 @@ const Card = ({ id, fullname, nickname, date, age, gender }) => {
           <ModalDelete
             onClose={() => setIsDeleteModalOpen(false)}
             id={id}
-            fullname={fullname}
-            nickname={nickname}
-            date={date}
-            age={age}
-            gender={gender}
           />
         )}
       </div>

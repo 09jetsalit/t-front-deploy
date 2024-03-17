@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Modal = ({ onClose, id }) => {
+const Modal = ({ onClose, }) => {
   const [fullname, setFullname] = useState("");
   const [nickname, setNickname] = useState("");
   const [dob, setDob] = useState("");
@@ -11,7 +11,6 @@ const Modal = ({ onClose, id }) => {
 
   const handleData = async () => {
     const data = {
-      id: id,
       fullname: fullname,
       nickname: nickname,
       date0fbirth: dob,
@@ -20,8 +19,9 @@ const Modal = ({ onClose, id }) => {
       createdate: new Date(),
     };
     try {
-      const resposedata = await axios.post("/", data);
+      const resposedata = await axios.post("http://127.0.0.1:8000/member", data);
       if (resposedata.status === 200 && resposedata.data) {
+        // console.log(resposedata);
         onClose(); // Close the modal after deletion
       }
     } catch (error) {
