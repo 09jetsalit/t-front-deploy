@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const Modal = ({ onClose, }) => {
+const Modal = ({ onClose}) => {
   const [fullname, setFullname] = useState("");
   const [nickname, setNickname] = useState("");
   const [dob, setDob] = useState("");
@@ -19,10 +19,9 @@ const Modal = ({ onClose, }) => {
       createdate: new Date(),
     };
     try {
-      const resposedata = await axios.post("http://127.0.0.1:8000/member", data);
-      if (resposedata.status === 200 && resposedata.data) {
-        // console.log(resposedata);
-        onClose(); // Close the modal after deletion
+      const response = await axios.post("http://127.0.0.1:8000/member", data);
+      if (response.status === 200 && response.data) {
+        onClose(); // Close the modal after adding the member
       }
     } catch (error) {
       console.log(error);
@@ -55,6 +54,7 @@ const Modal = ({ onClose, }) => {
     setGender(selectedGender);
   };
 
+ 
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-40 backdrop-blue-sm flex justify-center items-center"

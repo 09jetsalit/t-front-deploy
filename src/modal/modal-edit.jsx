@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const ModalEdit = ({ onClose, id, fullname, nickname, date, age, gender }) => {
     const [fullNameEdit, setFullNameEdit] = useState(fullname);
     const [nickNameEdit, setNickNameEdit] = useState(nickname);
-    const [dobEdit, setDOBEdit] = useState(date);
+    const [dobEdit, setDOBEdit] = useState(date || '');
     const [ageEdit, setAgeEdit] = useState(age);
     const [genderEdit, setGenderEdit] = useState(gender);
     const [otherGender, setOtherGender] = useState("");
@@ -18,7 +19,7 @@ const ModalEdit = ({ onClose, id, fullname, nickname, date, age, gender }) => {
         gender: genderEdit,
       };
       try {
-        const resposedata = await axios.put("#", data);
+        const resposedata = await axios.put(`http://127.0.0.1:8000/member/${id}`, data);
         if (resposedata.status === 200 && resposedata.data) {
             onClose(); // Close the modal after deletion
         }
@@ -28,21 +29,22 @@ const ModalEdit = ({ onClose, id, fullname, nickname, date, age, gender }) => {
     };
 
     const handleDOBChange = (e) => {
-        const selectedDate = new Date(e.target.value);
-        setDOBEdit(selectedDate.toISOString().split("T")[0]);
-
-        // คำนวณอายุจากวันเกิดที่ผู้ใช้เลือก
-        const currentDate = new Date();
-        const birthDate = new Date(selectedDate);
-        let calculatedAge = currentDate.getFullYear() - birthDate.getFullYear();
-        const monthDiff = currentDate.getMonth() - birthDate.getMonth();
-        if (
-            monthDiff < 0 ||
-            (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())
-        ) {
-            calculatedAge--;
+        if (e && e.target && e.target.value) {
+            const selectedDate = new Date(e.target.value);
+            setDOBEdit(selectedDate.toISOString().split("T")[0]);
+    
+            // Calculate age from selected birthdate
+            const currentDate = new Date();
+            const birthDate = new Date(selectedDate);
+            let calculatedAge = currentDate.getFullYear() - birthDate.getFullYear();
+            const monthDiff = currentDate.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
+                calculatedAge--;
+            }
+            setAgeEdit(calculatedAge);
+        } else {
+            console.error("Invalid date input:", e);
         }
-        setAgeEdit(calculatedAge);
     };
 
     const handleGenderChange = (e) => {
