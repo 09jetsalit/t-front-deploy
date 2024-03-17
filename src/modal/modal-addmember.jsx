@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-const Modal = ({ onClose }) => {
+const Modal = ({ onClose, id }) => {
   const [fullname, setFullname] = useState("");
   const [nickname, setNickname] = useState("");
   const [dob, setDob] = useState("");
@@ -12,16 +11,18 @@ const Modal = ({ onClose }) => {
 
   const handleData = async () => {
     const data = {
+      id: id,
       fullname: fullname,
       nickname: nickname,
       date0fbirth: dob,
       age: age,
       gender: gender,
+      createdate: new Date(),
     };
     try {
       const resposedata = await axios.post("/", data);
       if (resposedata.status === 200 && resposedata.data) {
-        return <Link to="/" />;
+        onClose(); // Close the modal after deletion
       }
     } catch (error) {
       console.log(error);
@@ -106,13 +107,13 @@ const Modal = ({ onClose }) => {
             required
           ></input>
           {/* age */}
-          <label htmlFor="age" className="flex flex-col items-center">
+          <label htmlFor="age" className="flex flex-col items-cente">
             Age:{" "}
           </label>
           {/* Flexbox container */}
           <input
             type="number"
-            className="rounded-md border-2 border-slate-400 text-center" // เพิ่ม text-center เพื่อจัดวางข้อความใน input ตรงกลาง
+            className="rounded-md border-2 border-slate-400 text-center bg-gray-300" // เพิ่ม text-center เพื่อจัดวางข้อความใน input ตรงกลาง
             name="age"
             value={age}
             readOnly // ตั้งค่าให้เป็นอ่านอย่างเดียว
@@ -187,7 +188,7 @@ const Modal = ({ onClose }) => {
             </button>
             <button
               onClick={onClose}
-              className="p-1.5 mr-2 mt-2 mb-4 bg-slate-300 rounded-md"
+              className="p-1.5 mr-2 mt-2 mb-4 bg-slate-300 rounded-md hover:bg-slate-100"
             >
               Close
             </button>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ModalEdit = ({ onClose, fullname, nickname, date, age, gender }) => {
+const ModalEdit = ({ onClose, id, fullname, nickname, date, age, gender }) => {
     const [fullNameEdit, setFullNameEdit] = useState(fullname);
     const [nickNameEdit, setNickNameEdit] = useState(nickname);
     const [dobEdit, setDOBEdit] = useState(date);
@@ -10,6 +10,7 @@ const ModalEdit = ({ onClose, fullname, nickname, date, age, gender }) => {
 
     const handleData = async () => {
       const data = {
+        id: id,
         fullname: fullNameEdit,
         nickname: nickNameEdit,
         date0fbirth: dobEdit,
@@ -17,9 +18,9 @@ const ModalEdit = ({ onClose, fullname, nickname, date, age, gender }) => {
         gender: genderEdit,
       };
       try {
-        const resposedata = await axios.put("/", data);
+        const resposedata = await axios.put("#", data);
         if (resposedata.status === 200 && resposedata.data) {
-          return <Link to="/" />;
+            onClose(); // Close the modal after deletion
         }
       } catch (error) {
         console.log(error);
@@ -110,7 +111,7 @@ const ModalEdit = ({ onClose, fullname, nickname, date, age, gender }) => {
                     </label>
                     <input
                         type="number"
-                        className="rounded-md border-2 border-slate-400 text-center"
+                        className="rounded-md border-2 border-slate-400 text-center bg-gray-300"
                         name="age"
                         value={ageEdit}
                         readOnly // ไม่ต้องการให้แก้ไขข้อมูลอายุ
@@ -190,7 +191,7 @@ const ModalEdit = ({ onClose, fullname, nickname, date, age, gender }) => {
             </button>
             <button
               onClick={onClose}
-              className="p-1.5 mr-2 mt-2 mb-4 bg-slate-300 rounded-md"
+              className="p-1.5 mr-2 mt-2 mb-4 bg-slate-300 rounded-md hover:bg-slate-100"
             >
               Close
             </button>

@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import deleteIcon from "../assets/delete-black.svg";
 import editIcon from "../assets/edit.svg";
 import ModalEdit from "../modal/modal-edit";
+import ModalDelete from "../modal/modal.delete";
 
-const Card = ({ fullname, nickname, date, age, gender }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false); // state เพื่อเก็บสถานะของ Modal
+const Card = ({ id, fullname, nickname, date, age, gender }) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State for edit modal
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete modal
 
-  const handleModalClick = () => {
-    setIsModalOpen(true); // เมื่อคลิก "Add member" เปิด Modal
+  const handleEditClick = () => {
+    setIsEditModalOpen(true); // Open edit modal
+  };
+
+  const handleDeleteClick = () => {
+    setIsDeleteModalOpen(true); // Open delete modal
   };
 
   return (
@@ -18,17 +24,18 @@ const Card = ({ fullname, nickname, date, age, gender }) => {
       <div className="label">Age: {age}</div>
       <div className="label">Gender: {gender}</div>
 
-      {/* SVG icon using <img> tag */}
+      {/* Edit and Delete Icons */}
       <div className="flex flex-row gap-2 justify-end mt-2">
         <img
-          onClick={handleModalClick}
+          onClick={handleEditClick}
           src={editIcon}
           alt="Edit Icon"
-          className="w-5 h-5 cursor-pointer"
+          className="w-5 h-5 cursor-pointer icon-hover"
         />
-        {isModalOpen && (
+        {isEditModalOpen && (
           <ModalEdit
-            onClose={() => setIsModalOpen(false)}
+            onClose={() => setIsEditModalOpen(false)}
+            id={id}
             fullname={fullname}
             nickname={nickname}
             date={date}
@@ -37,11 +44,22 @@ const Card = ({ fullname, nickname, date, age, gender }) => {
           />
         )}
         <img
-          onClick={handleModalClick}
+          onClick={handleDeleteClick}
           src={deleteIcon}
           alt="Delete Icon"
           className="w-5 h-5 cursor-pointer"
         />
+        {isDeleteModalOpen && (
+          <ModalDelete
+            onClose={() => setIsDeleteModalOpen(false)}
+            id={id}
+            fullname={fullname}
+            nickname={nickname}
+            date={date}
+            age={age}
+            gender={gender}
+          />
+        )}
       </div>
     </div>
   );
