@@ -10,6 +10,12 @@ const Modal = ({ onClose}) => {
   const [otherGender, setOtherGender] = useState("");
 
   const handleData = async () => {
+    if (!fullname || !nickname || !dob || !gender) {
+      // ถ้ายังมี input ที่ยังไม่ได้กรอก ให้แสดงข้อความแจ้งเตือนหรือดำเนินการต่อตามที่คุณต้องการ
+      alert("Please fill in all required fields.");
+      return; // หยุดการทำงานของฟังก์ชันนี้
+  }
+     
     const data = {
       fullname: fullname,
       nickname: nickname,
@@ -68,6 +74,7 @@ const Modal = ({ onClose}) => {
         <form
           className="flex flex-col pr-20 pl-20"
           onSubmit={(e) => e.preventDefault()}
+          action="/submit-form" method="post"
         >
           {/* fullname */}
           <label htmlFor="fullname" className="flex flex-col items-center">
@@ -181,6 +188,7 @@ const Modal = ({ onClose}) => {
           {/* button */}
           <div className="flex flex-row justify-center items-center flex-nowrap">
             <button
+              type="submit"
               onClick={handleData}
               className="bg-blue-500 rounded-md hover:bg-blue-200 p-1.5 mr-2 mt-2 mb-4"
             >

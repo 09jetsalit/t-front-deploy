@@ -10,6 +10,12 @@ const ModalEdit = ({ onClose, id, fullname, nickname, date, age, gender }) => {
     const [otherGender, setOtherGender] = useState("");
 
     const handleData = async () => {
+        if (!fullNameEdit || !nickNameEdit || !dobEdit || !genderEdit) {
+            // ถ้ายังมี input ที่ยังไม่ได้กรอก ให้แสดงข้อความแจ้งเตือนหรือดำเนินการต่อตามที่คุณต้องการ
+            alert("Please fill in all required fields.");
+            return; // หยุดการทำงานของฟังก์ชันนี้
+        }
+
       const data = {
         id: id,
         fullname: fullNameEdit,
