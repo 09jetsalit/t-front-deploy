@@ -32,7 +32,6 @@ const App = () => {
 
   return (
     <div className="w-full h-screen">
-      {/* <h1>Hello World</h1> */}
       <Nav refreshData={refreshData}/>
       <div className="mr-5 ml-5 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {data.map((member, index) => (
