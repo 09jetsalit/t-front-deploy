@@ -9,7 +9,7 @@ const App = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/member");
+      const response = await axios.get("https://t-back-deploy.onrender.com/member");
 
       // Sort the data based on createdate in descending order
       const sortedData = response.data.sort(

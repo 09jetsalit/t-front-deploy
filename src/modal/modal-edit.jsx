@@ -25,7 +25,7 @@ const ModalEdit = ({ onClose, id, fullname, nickname, date, age, gender }) => {
         gender: genderEdit,
       };
       try {
-        const resposedata = await axios.put(`http://127.0.0.1:8000/member/${id}`, data);
+        const resposedata = await axios.put(`https://t-back-deploy.onrender.com/member/${id}`, data);
         if (resposedata.status === 200 && resposedata.data) {
             onClose(); // Close the modal after deletion
         }

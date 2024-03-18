@@ -4,7 +4,7 @@ import modalDeleteIcon from "../assets/delete-red.svg";
 const ModalDelete = ({ id, onClose }) => {
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/member/${id}`); // Assuming your delete endpoint is configured correctly
+      await axios.delete(`https://t-back-deploy.onrender.com/member/${id}`); // Assuming your delete endpoint is configured correctly
       console.log("Item deleted successfully with ID:", id);
       onClose(); // Close the modal after deletion
     } catch (error) {

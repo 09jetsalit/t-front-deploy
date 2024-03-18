@@ -25,7 +25,7 @@ const Modal = ({ onClose}) => {
       createdate: new Date(),
     };
     try {
-      const response = await axios.post("http://127.0.0.1:8000/member", data);
+      const response = await axios.post("https://t-back-deploy.onrender.com/member", data);
       if (response.status === 200 && response.data) {
         onClose(); // Close the modal after adding the member
       }
